@@ -105,10 +105,8 @@ class Window2(Frame):
         self.chatEntry.place(x=10,y=10,height=400,width=675)
         self.msgBox = Entry(self.parent1)
         self.msgBox.place(x=10,y=420,height=55,width = 555)
-        photo=PhotoImage(file="send.png")
-        self.send_btn = Button(self.parent1,font = ('Comic sans ms',8,'bold'), bg='light Green',fg='white',command=lambda:self.sendMsg())
-        self.send_btn.config(image=photo,width="60",height="70")
-
+        
+        self.send_btn = Button(self.parent1, text="Enter", width=13, height=3,font = ('Comic sans ms',9,'bold'), bg='black',fg='white',command=lambda:self.sendMsg())
         self.send_btn.place(x=575, y=418)
 
     #def display(self,answer):
@@ -145,14 +143,16 @@ class Window2(Frame):
         #self.reply = client.recv(2048).decode(FORMAT)
             reply = client.recv(2048).decode(FORMAT)
             if reply == "Message Received!":
-                self.chatEntry.delete(0,END)
-                self.chatEntry.insert(0,f"[SERVER] -->> {reply}\n") 
+                self.chatEntry.delete(0,'end')
+                self.chatEntry.insert('end',f"[SERVER] -->> {reply}\n") 
             else:
-                self.chatEntry.delete(0,END)    
-                self.chatEntry.insert(0,"Message Not sent!\n") 
+                self.chatEntry.delete(0,'end')    
+                self.chatEntry.insert('end',reply)
+                self.chatEntry.insert('end',"Message Not sent.. Please try again!") 
             #self.display(self.reply)
         else:
-            self.chatEntry.insert(0,f"[SERVER] -->> Please Enter a Message!") 
+            self.chatEntry.delete(0,'end')
+            self.chatEntry.insert('end',f"[SERVER] -->> Please Enter a Message!") 
                
 """
         msg = 'Hello'
