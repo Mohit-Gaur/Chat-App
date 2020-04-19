@@ -24,14 +24,17 @@ def handle_client(conn,addr):
     print(f"[NEW CONNECTION] {addr} {NAME} connected.. ")
     connected = True
     while connected:
+        #serverMsg = input("Ënter Your Message :- ")
+        #conn.send(serverMsg.encode(FORMAT))
         #msg_length = conn.recv(HEADER).decode(FORMAT)
         #if msg_length != ' ':
         #msg_length = int(msg_length)
         msg = conn.recv(2048).decode(FORMAT)
-        if msg == DISCONNECT_MSG:
+        if msg == "!DISCONNET":
             connected = False
         print(f"{NAME} -->> {msg}")
         conn.send("Message Received!".encode(FORMAT))
+        
      
     print(f"[DISCONNECTING] Closing connection with {addr}")
     print(f"Number of Active connections :- [{threading.activeCount()-1}]")
